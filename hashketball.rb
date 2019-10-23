@@ -1,4 +1,6 @@
-def game_hash 
+require 'pry'
+def game_hash
+  {
  :home =>{:team_name => 'Brooklyn Nets',
           :colors => ['Black','White'],
           :players => [
@@ -55,8 +57,9 @@ def game_hash
                :steals => 4,
                :blocks => 11,
                :slam_dunks => 1
-               ],
-               
+              }
+            ]
+          },
               :away =>{:team_name => 'Charlotte Hornets',
                        :colors => ['Turquoise', 'Purple'],
                        :players => [
@@ -81,6 +84,7 @@ def game_hash
                            :blocks => 15,
                            :slam_dunks => 10
                           },
+                          
                            {:player_name => 'DeSagna Diop',
                             :number => 2,
                             :shoe => 14,
@@ -115,10 +119,17 @@ def game_hash
                            }
                    
                        ]
-              }
+              } 
+    
+         }
               
 end           
-                    
+
+def num_points_scored(player_name)
+  
+  game_hash.each do |place,team|
+    binding.pry
+end
                     
                     
                     
