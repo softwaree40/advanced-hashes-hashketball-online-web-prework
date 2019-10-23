@@ -17,8 +17,8 @@ def game_hash
              
              {:player_name => 'Reggie Evans',
               :number => 30,
-              :shoe => 16,
-              :points => 22,
+              :shoe => 14,
+              :points => 12,
               :rebounds => 12,
               :assists => 12,
               :steals => 3,
@@ -124,15 +124,76 @@ def game_hash
          }
               
 end           
-
-def num_points_scored(player_name)
-  
+def num_points_scored(players_name)
   game_hash.each do |place,team|
-    binding.pry
+    team.each do |att,data|
+      if att == :players
+        data.each do |player|
+          if player[:player_name] == players_name
+            return player[:points]
+          end
+        end
+      end
+    end
+  end
 end
-                    
-                    
-                    
+def shoe_size(players_name)
+  game_hash.each do |place,team|
+    team.each do |att,data|
+      if att == :players
+        data.each do |player|
+          if player[:player_name] == players_name
+            return player[:shoe]
+          end
+        end
+      end
+    end
+  end
+end
+def team_colors(team_name)
+    game_hash.each do |place,team|
+      if team[:team_name] == team_name
+         return team[:colors]
+      end
+    end
+end
+def team_names
+    game_hash.map do |place, team|
+    team[:team_name]
+    end
+end
+def player_numbers(team_name)
+     number = []
+    game_hash.map do |place,team|
+    if team[:team_name] == team_name
+      team.each do |att ,data|
+        if att == :players
+          data.each do |player|
+         number << player[:number]
+        end
+        end
+      end
+    end
+  end
+  number
+end
+def player_stats(players_name)
+  new_hash = {}
+  game_hash.each do |place,team|
+    team.each do |att,data|
+      if att == :players
+        data.each do |player|
+          if player[:player_name] == players_name
+            new_hash = player.delete_if do |k, v|
+              k == :player_name
+            end
+          end
+        end
+      end
+    end
+  end
+   new_hash
+end
                     
                     
                     
