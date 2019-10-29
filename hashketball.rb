@@ -21,8 +21,8 @@ def game_hash
               :points => 12,
               :rebounds => 12,
               :assists => 12,
-              :steals => 3,
-              :blocks => 1,
+              :steals => 12,
+              :blocks => 12,
               :slam_dunks => 7
               },
               
@@ -126,10 +126,14 @@ def game_hash
 end           
 def num_points_scored(players_name)
   game_hash.each do |place,team|
+   
     team.each do |att,data|
+      
       if att == :players
         data.each do |player|
+          
           if player[:player_name] == players_name
+            #binding.pry
             return player[:points]
           end
         end
@@ -139,10 +143,12 @@ def num_points_scored(players_name)
 end
 def shoe_size(players_name)
   game_hash.each do |place,team|
+    #binding.pry
     team.each do |att,data|
       if att == :players
         data.each do |player|
           if player[:player_name] == players_name
+            #binding.pry
             return player[:shoe]
           end
         end
@@ -153,6 +159,7 @@ end
 def team_colors(team_name)
     game_hash.each do |place,team|
       if team[:team_name] == team_name
+        #binding.pry
          return team[:colors]
       end
     end
@@ -160,16 +167,18 @@ end
 def team_names
     game_hash.map do |place, team|
     team[:team_name]
+    #binding.pry
     end
 end
 def player_numbers(team_name)
      number = []
-    game_hash.map do |place,team|
+    game_hash.each do |place,team|
     if team[:team_name] == team_name
       team.each do |att ,data|
         if att == :players
           data.each do |player|
          number << player[:number]
+         #binding.pry
         end
         end
       end
@@ -186,6 +195,7 @@ def player_stats(players_name)
           if player[:player_name] == players_name
             new_hash = player.delete_if do |k, v|
               k == :player_name
+              #binding.pry
             end
           end
         end
@@ -194,7 +204,22 @@ def player_stats(players_name)
   end
    new_hash
 end
-                    
+
+def big_shoe_rebounds
+    game_hash[:home][:players].each do |att1|
+      
+       game_hash[:away][:players].each do |att2|
+         
+         if att1[:shoe] > att2[:shoe]
+           return att2[:rebounds]
+         else
+           return att1[:rebounds]
+          end
+       end
+    end
+end
+  
+
                     
                     
                     
