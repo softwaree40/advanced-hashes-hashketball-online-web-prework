@@ -262,10 +262,16 @@ def player_with_longest_name
         
        end
      end
+      max = nil
      total_players.each do |word|
-       puts word
+       if max == nil || word.length > max.length
+         max = word
+       
+         
+       end
+       
   end
-   return total_players
+   return max
 end
 
     
