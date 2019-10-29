@@ -223,10 +223,52 @@ def big_shoe_rebounds
     return rebounds_of_the_player
 end
 def most_points_scored
-  
+  #player that score the most point 
+   biggest_scored = 0
+   player_name = ''
+  game_hash.each do |place,team|
+      team[:players].each do |player|
+        
+        if player[:points] > biggest_scored
+          biggest_scored = player[:points]
+          player_name = player[:player_name]
+        end
+      end
+  end
+    return player_name
+end
+def winning_team
+     point_each_team = {"Brooklyn Nets" => 0 ,'Charlotte Hornets' => 0}
+   
+  game_hash.each do |place,team|
+      team[:players].each do |player|
+        point_each_team[team[:team_name]]+=player[:points]
+        
+        
+     end
+       
+  end
+     if point_each_team["Brooklyn Nets"] > point_each_team["Charlotte Hornets"]
+       return "Brooklyn Nets"
+     else
+       return "Charlotte Hornets"
+     end
+end
+def player_with_longest_name
+     total_players = []
+    game_hash.each do |place,team|
+      team[:players].each do |player|
+       total_players << player[:player_name]
+        
+       end
+     end
+     total_players.each do |word|
+       puts word
+  end
+   return total_players
 end
 
-                    
+    
                     
                     
                     
