@@ -221,6 +221,7 @@ def big_shoe_rebounds
       
     end
     return rebounds_of_the_player
+
 end
 def most_points_scored
   #player that score the most point 
@@ -272,31 +273,35 @@ def player_with_longest_name
        
   end
    return max
+
 end
 
 def long_name_steals_a_ton?
+     most_steals = 0
+     player_name = ''
      total_players = []
     game_hash.each do |place,team|
       team[:players].each do |player|
        total_players << player[:player_name]
-        
+        if player[:steals] > most_steals
+          most_steals = player[:steals]
+          player_name = player[:player_name]
+        end
        end
      end
       max = nil
      total_players.each do |word|
        if max == nil || word.length > max.length
          max = word
-       
-         
          end
-       
+      end
+     
+     if max == player_name
+       return true
+     else
+        return false 
      end
      
-     if max == player[:steals]
-       return false
-       
-     end
-     return true
   end
                     
                     
