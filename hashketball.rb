@@ -290,6 +290,7 @@ def long_name_steals_a_ton?
        end
      end
       max = ''
+      
      total_players.each do |word|
        if  word.length > max.length
          max = word
